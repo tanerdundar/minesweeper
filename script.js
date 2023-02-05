@@ -10,7 +10,6 @@ for (let i = 1; i <= column; i++) {
     container.appendChild(columnsDiv)
 
     for (let j = 1; j <= row; j++) {
-
         let field = document.createElement("div")
         columnsDiv.appendChild(field)
         field.style.width = "50px"
@@ -36,9 +35,7 @@ container.style.height = row * 55 + "px";
 
 for (let i = 0; i < Math.floor(((mineFieldObjects.length * 41) / 100) + 0.5);) {
     let bombId = Math.floor(Math.random() * (area))
-
     if (mineFieldObjects[bombId].bomb) {
-
     } else {
         let createBomb = document.createElement("i");
         createBomb.classList.add("fa-solid", "fa-bomb", "fa-2x")
@@ -55,7 +52,6 @@ for (let i = 0; i < area; i++) {
     divButton.addEventListener('click', () => {
         if (mineFieldObjects[i].bomb) {
             let bombsField = mineFieldObjects.filter((item) => item.bomb == true)
-
             for (let j = 0; j < bombsField.length; j++) {
 
                 let foundDiv = document.getElementById("field" + (bombsField[j].id))
@@ -64,5 +60,3 @@ for (let i = 0; i < area; i++) {
         }
     })
 }
-
-// Created By Omer Faruk
