@@ -4,8 +4,8 @@ let area = row * column;
 let id = 1
 let container = document.getElementById('dene')
 let mineFieldObjects = [];
-container.style.width = column * 55 + "px";
-container.style.height = row * 55 + "px";
+container.style.width = column * 60 + "px";
+container.style.height = row * 60 + "px";
 
 for (let i = 1; i <= column; i++) {
     let columnsDiv = document.createElement("div");
