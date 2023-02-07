@@ -45,7 +45,7 @@ startButton.addEventListener('click', function () {
         } else {
             let createBomb = document.createElement("i");
             createBomb.classList.add("fa-solid", "fa-bomb", "fa-2x")
-            createBomb.style.opacity = "0.2"
+            createBomb.style.opacity = "0.0"
             createBomb.style.marginTop = "10px"
             mineFieldObjects[bombId].bomb = true;
             let fieldWithBomb = document.getElementById("field" + (bombId + 1))
