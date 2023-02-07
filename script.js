@@ -22,18 +22,15 @@ for (let i = 1; i <= column; i++) {
         field.id = "field" + id;
         field.x = i;
         field.y = j;
-        field.isThereFlag = false;
         field.isThereBomb = false;
         mineFieldObjects.push({
             id: id++,
             x: i,
             y: j,
             bomb: false,
-            flag: false,
         })
     }
 }
-
 for (let i = 0; i < Math.floor(((mineFieldObjects.length * 15) / 100) + 0.5);) {
     let bombId = Math.floor(Math.random() * (area))
     if (mineFieldObjects[bombId].bomb) {
@@ -51,20 +48,12 @@ for (let i = 0; i < Math.floor(((mineFieldObjects.length * 15) / 100) + 0.5);) {
 }
 for (let i = 0; i < area; i++) {
 
-
     let flag = document.getElementById("field" + (i + 1))
     flag.addEventListener("contextmenu", function (e) {
-        if (!(document.getElementById("field" + (i + 1))).isThereFlag) {
-            e.preventDefault()
-            document.getElementById("field" + (i + 1)).isThereFlag = true
-            let createFlag = document.createElement("i");
-            createFlag.classList.add("fa-solid", "fa-flag", "fa-2x")
-            createFlag.style.color = "red"
-            createFlag.style.marginTop = "10px"
-            this.appendChild(createFlag)
-        } else { }
-    });
+        e.preventDefault()
+        flag.style.backgroundColor = "red"
 
+    });
 }
 for (let i = 0; i < area; i++) {
     let divButton = document.getElementById("field" + (i + 1))
@@ -72,7 +61,6 @@ for (let i = 0; i < area; i++) {
         if (mineFieldObjects[i].bomb) {
             let bombsField = mineFieldObjects.filter((item) => item.bomb == true)
             for (let j = 0; j < bombsField.length; j++) {
-
                 let foundDiv = document.getElementById("field" + (bombsField[j].id))
                 foundDiv.firstChild.style.opacity = "1.0"
             }
@@ -85,7 +73,6 @@ for (let i = 0; i < area; i++) {
         }
     })
 }
-
 function numberFinder(i) {
     let fieldAroundX = mineFieldObjects.filter((item) => (item.x <= (mineFieldObjects[i].x + 1)) && (item.x >= (mineFieldObjects[i].x - 1)))
     let fieldAroundY = fieldAroundX.filter((item) => (item.y <= (mineFieldObjects[i].y + 1)) && (item.y >= (mineFieldObjects[i].y - 1)))
@@ -95,12 +82,8 @@ function numberFinder(i) {
             neighbourBombs++;
         }
     }
-
     return neighbourBombs;
 }
-
-// console.log(neighbourBombs)
-
 function backgroundChanger(i) {
     let zeroBombDiv = document.getElementById("field" + mineFieldObjects[i].id)
     zeroBombDiv.style.backgroundColor = "rgb(247, 245, 242)"
@@ -109,6 +92,7 @@ function backgroundChanger(i) {
 function insideChanger(num, i) {
     let divWithBombNeighbour = document.getElementById("field" + mineFieldObjects[i].id)
     divWithBombNeighbour.innerHTML = num
+    divWithBombNeighbour.style.backgroundColor = "rgb(228, 218, 205)";
     divWithBombNeighbour.style.fontSize = "40px"
 }
 function zeroBombDivs() {
