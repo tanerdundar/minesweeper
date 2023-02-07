@@ -1,5 +1,5 @@
-let column = 10;
-let row = 8;
+let column = 4;
+let row = 5;
 let area = row * column;
 let id = 1
 let container = document.getElementById('dene')
@@ -37,7 +37,7 @@ for (let i = 0; i < Math.floor(((mineFieldObjects.length * 15) / 100) + 0.5);) {
     } else {
         let createBomb = document.createElement("i");
         createBomb.classList.add("fa-solid", "fa-bomb", "fa-2x")
-        createBomb.style.opacity = "0.0"
+        createBomb.style.opacity = "0.2"
         createBomb.style.marginTop = "10px"
         mineFieldObjects[bombId].bomb = true;
         let fieldWithBomb = document.getElementById("field" + (bombId + 1))
@@ -105,19 +105,39 @@ function recursiveTrial(param) {
     console.log(param)
     if (numberFinder(i) == 0) {
         backgroundChanger(i)
-        if (param.y < row && param.id < area && param.id > 1) {
+
+        // Down
+        if (param.y < row && param.id < area && param.id >= 1) {
             recursiveTrial(mineFieldObjects.filter((item) => item.id == param.id + 1)[0])
         }
-        if (param.y > 1 && param.id < area && param.id > 1) {
+        // Up
+        if (param.y > 1 && param.id <= area && param.id > 1) {
             recursiveTrial(mineFieldObjects.filter((item) => item.id == param.id - 1)[0])
         }
-        if (param.x < column && param.id < area && param.id > 1) {
+        // Right
+        if (param.x < column && param.id < area && param.id >= 1) {
             recursiveTrial(mineFieldObjects.filter((item) => item.id == param.id + row)[0])
         }
-        if (param.x > 1 && param.id < area && param.id > 1) {
+        // Left
+        if (param.x > 1 && param.id <= area && param.id > 1) {
             recursiveTrial(mineFieldObjects.filter((item) => item.id == param.id - row)[0])
         }
-
+        // Left - Up
+        if (param.y > 1 && param.x > 1 && param.id <= area && param.id > 1) {
+            recursiveTrial(mineFieldObjects.filter((item) => item.id == param.id - (row + 1))[0])
+        }
+        // Left - Down
+        if (param.y < row && param.x > 1 && param.id < area && param.id > 1) {
+            recursiveTrial(mineFieldObjects.filter((item) => item.id == param.id - (row - 1))[0])
+        }
+        // Right - Up
+        if (param.y > 1 && param.x < column && param.id < area && param.id > 1) {
+            recursiveTrial(mineFieldObjects.filter((item) => item.id == param.id + (row - 1))[0])
+        }
+        // Right - Down
+        if (param.y < row && param.x < column && param.id < area && param.id >= 1) {
+            recursiveTrial(mineFieldObjects.filter((item) => item.id == param.id + (row + 1))[0])
+        }
 
     } else {
         insideChanger(numberFinder(i), i)
