@@ -1,5 +1,5 @@
 let column = 10;
-let row = 10;
+let row = 8;
 let area = row * column;
 let id = 1
 let container = document.getElementById('dene')
@@ -51,13 +51,15 @@ for (let i = 0; i < area; i++) {
     let flag = document.getElementById("field" + (i + 1))
     flag.addEventListener("contextmenu", function (e) {
         e.preventDefault()
-        flag.style.backgroundColor = "red"
+        let color = flag.style.backgroundColor;
+        flag.style.backgroundColor = ("red" == color) ? "rgb(228, 218, 205)" : "red"
 
     });
 }
 for (let i = 0; i < area; i++) {
     let divButton = document.getElementById("field" + (i + 1))
     divButton.addEventListener('click', () => {
+
         if (mineFieldObjects[i].bomb) {
             let bombsField = mineFieldObjects.filter((item) => item.bomb == true)
             for (let j = 0; j < bombsField.length; j++) {
@@ -65,11 +67,8 @@ for (let i = 0; i < area; i++) {
                 foundDiv.firstChild.style.opacity = "1.0"
             }
         } else {
-            if (numberFinder(i) == 0) {
-                backgroundChanger(i)
-            } else {
-                insideChanger(numberFinder(i), i)
-            }
+            recursiveTrial(mineFieldObjects[i])
+
         }
     })
 }
@@ -95,6 +94,32 @@ function insideChanger(num, i) {
     divWithBombNeighbour.style.backgroundColor = "rgb(228, 218, 205)";
     divWithBombNeighbour.style.fontSize = "40px"
 }
-function zeroBombDivs() {
 
+let checkedDivs = [];
+
+function recursiveTrial(param) {
+    if (param.bomb || checkedDivs.some((idNumber) => idNumber == param.id))
+        return;
+    checkedDivs.push(param.id)
+    let i = param.id - 1
+    console.log(param)
+    if (numberFinder(i) == 0) {
+        backgroundChanger(i)
+        if (param.y < row && param.id < area && param.id > 1) {
+            recursiveTrial(mineFieldObjects.filter((item) => item.id == param.id + 1)[0])
+        }
+        if (param.y > 1 && param.id < area && param.id > 1) {
+            recursiveTrial(mineFieldObjects.filter((item) => item.id == param.id - 1)[0])
+        }
+        if (param.x < column && param.id < area && param.id > 1) {
+            recursiveTrial(mineFieldObjects.filter((item) => item.id == param.id + row)[0])
+        }
+        if (param.x > 1 && param.id < area && param.id > 1) {
+            recursiveTrial(mineFieldObjects.filter((item) => item.id == param.id - row)[0])
+        }
+
+
+    } else {
+        insideChanger(numberFinder(i), i)
+    }
 }
