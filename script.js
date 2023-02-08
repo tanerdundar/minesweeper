@@ -39,7 +39,7 @@ for (let i = 0; i < Math.floor(((mineFieldObjects.length * 15) / 100) + 0.5);) {
     } else {
         let createBomb = document.createElement("i");
         createBomb.classList.add("fa-solid", "fa-bomb", "fa-2x")
-        createBomb.style.opacity = "0.2"
+        createBomb.style.opacity = "0.0"
         createBomb.style.marginTop = "10px"
         mineFieldObjects[bombId].bomb = true;
         let fieldWithBomb = document.getElementById("field" + (bombId + 1))
@@ -77,7 +77,6 @@ for (let i = 0; i < area; i++) {
         } else {
             recursiveTrial(mineFieldObjects[i])
         }
-
     })
 }
 function numberFinder(i) {
@@ -102,6 +101,17 @@ function insideChanger(num, i) {
     let divWithBombNeighbour = document.getElementById("field" + mineFieldObjects[i].id)
     if (divWithBombNeighbour.isChangeable) {
         divWithBombNeighbour.innerHTML = num
+        switch (num) {
+            case 1: divWithBombNeighbour.style.color = "red"; break;
+            case 2: divWithBombNeighbour.style.color = "orange"; break;
+            case 3: divWithBombNeighbour.style.color = "blue"; break;
+            case 4: divWithBombNeighbour.style.color = "green"; break;
+            case 5: divWithBombNeighbour.style.color = "purple"; break;
+            case 6: divWithBombNeighbour.style.color = "pink"; break;
+            case 7: divWithBombNeighbour.style.color = "brown"; break;
+            case 8: divWithBombNeighbour.style.color = "yellow"; break;
+        }
+        divWithBombNeighbour.style.borderColor = "black";
         divWithBombNeighbour.style.backgroundColor = "rgb(228, 218, 205)";
         divWithBombNeighbour.style.fontSize = "40px"
     }
