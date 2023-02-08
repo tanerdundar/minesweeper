@@ -1,16 +1,30 @@
 const startButton = document.getElementById("startButton")
+let start = false;
+
 startButton.addEventListener('click', function () {
-    fieldShowHide()
-    this.disabled = true
-    this.style.opacity = "0.0"
-    let column = 14;
+    mineSweeper()
+    startButton.style.opacity = "0.0"
+
+    if (start) {
+
+        setTimeout(() => window.location.reload(), 1)
+    } else {
+        start = true;
+    }
+})
+
+function mineSweeper() {
+    let column = 8;
     let row = 10;
     let area = row * column;
     let id = 1
     let container = document.getElementById('dene')
     let mineFieldObjects = [];
+    let fieldsArray = [];
     container.style.width = column * 55 + "px";
     container.style.height = row * 55 + "px";
+
+    // Creating field
     for (let i = 1; i <= column; i++) {
         let columnsDiv = document.createElement("div");
         container.appendChild(columnsDiv)
@@ -26,26 +40,26 @@ startButton.addEventListener('click', function () {
             field.id = "field" + id;
             field.x = i;
             field.y = j;
+            field.changeable = true;
             field.isThereBomb = false;
+            fieldsArray.push(field)
             mineFieldObjects.push({
                 id: id++,
                 x: i,
                 y: j,
                 bomb: false,
+                changeable: true,
             })
         }
     }
-    let bombNumber = Math.floor(((mineFieldObjects.length * 17) / 100) + 0.5)
-    let remainingBomb = document.getElementById("bomb-number")
-    remainingBomb.style.backgroundColor = "rgba(169, 153, 153, 1.0)"
-    remainingBomb.innerHTML = bombNumber;
-    for (let i = 0; i < bombNumber;) {
+    // Assign the bombs
+    for (let i = 0; i < Math.floor(((mineFieldObjects.length * 15) / 100) + 0.5);) {
         let bombId = Math.floor(Math.random() * (area))
         if (mineFieldObjects[bombId].bomb) {
         } else {
             let createBomb = document.createElement("i");
             createBomb.classList.add("fa-solid", "fa-bomb", "fa-2x")
-            createBomb.style.opacity = "0.0"
+            createBomb.style.opacity = "0.2"
             createBomb.style.marginTop = "10px"
             mineFieldObjects[bombId].bomb = true;
             let fieldWithBomb = document.getElementById("field" + (bombId + 1))
@@ -54,22 +68,38 @@ startButton.addEventListener('click', function () {
             i++;
         }
     }
+    // Assign the secret red flags
     for (let i = 0; i < area; i++) {
+
         let flag = document.getElementById("field" + (i + 1))
         flag.addEventListener("contextmenu", function (e) {
             e.preventDefault()
             let color = flag.style.backgroundColor;
-            flag.style.backgroundColor = ("red" == color) ? "rgb(228, 218, 205)" : "red";
-            (color == "red") ? bombNumber++ : bombNumber--
-            remainingBomb.innerHTML = bombNumber;
+            if (flag.changeable) {
+                flag.style.backgroundColor = ("red" == color) ? "rgb(228, 218, 205)" : "red"
 
+            }
 
         });
     }
+    // Activate the fields
     for (let i = 0; i < area; i++) {
         let divButton = document.getElementById("field" + (i + 1))
-        divButton.addEventListener('click', activateClickDiv)
+        divButton.addEventListener('click', () => {
+
+            if (mineFieldObjects[i].bomb) {
+                let bombsField = mineFieldObjects.filter((item) => item.bomb == true)
+                for (let j = 0; j < bombsField.length; j++) {
+                    let foundDiv = document.getElementById("field" + (bombsField[j].id))
+                    foundDiv.firstChild.style.opacity = "1.0"
+                }
+                divDisabler(fieldsArray)
+            } else {
+                recursiveTrial(mineFieldObjects[i])
+            }
+        })
     }
+    // Determine the numbers in fields
     function numberFinder(i) {
         let fieldAroundX = mineFieldObjects.filter((item) => (item.x <= (mineFieldObjects[i].x + 1)) && (item.x >= (mineFieldObjects[i].x - 1)))
         let fieldAroundY = fieldAroundX.filter((item) => (item.y <= (mineFieldObjects[i].y + 1)) && (item.y >= (mineFieldObjects[i].y - 1)))
@@ -81,28 +111,32 @@ startButton.addEventListener('click', function () {
         }
         return neighbourBombs;
     }
+    // Change the background color
     function backgroundChanger(i) {
         let zeroBombDiv = document.getElementById("field" + mineFieldObjects[i].id)
         zeroBombDiv.style.backgroundColor = "rgb(247, 245, 242)"
         zeroBombDiv.style.borderColor = "rgb(247, 245, 242)";
     }
+    // Write the numbers in fields
     function insideChanger(num, i) {
         let divWithBombNeighbour = document.getElementById("field" + mineFieldObjects[i].id)
-        let color = divWithBombNeighbour.style.backgroundColor
-        if (color === "red") {
-            //       bombNumber++;
-            remainingBomb.innerHTML = bombNumber
+        if (divWithBombNeighbour.changeable) {
+            divWithBombNeighbour.innerHTML = num
+            divWithBombNeighbour.style.backgroundColor = "rgb(228, 218, 205)";
+            divWithBombNeighbour.style.fontSize = "40px"
+            divWithBombNeighbour.changeable = false;
         }
-        divWithBombNeighbour.style.backgroundColor = "rgb(228, 218, 205)"
-        divWithBombNeighbour.innerHTML = num
-        divWithBombNeighbour.style.fontSize = "40px"
+
     }
     let checkedDivs = [];
+
+    // Scan the neighbours
     function recursiveTrial(param) {
         if (param.bomb || checkedDivs.some((idNumber) => idNumber == param.id))
             return;
         checkedDivs.push(param.id)
         let i = param.id - 1
+        console.log(param)
         if (numberFinder(i) == 0) {
             backgroundChanger(i)
 
@@ -143,36 +177,13 @@ startButton.addEventListener('click', function () {
             insideChanger(numberFinder(i), i)
         }
     }
-    function activateClickDiv() {
-        let i = this.getAttribute("id").substring(5) - 1;
-        if (mineFieldObjects[i].bomb) {
-            let bombsField = mineFieldObjects.filter((item) => item.bomb == true)
-            for (let j = 0; j < bombsField.length; j++) {
-                let foundDiv = document.getElementById("field" + (bombsField[j].id))
-                foundDiv.firstChild.style.opacity = "1.0"
-                startButton.style.opacity = "1.0"
-                startButton.disabled = false
-            }
-            for (let i = 0; i < area; i++) {
-                let disableDivButton = document.getElementById("field" + (i + 1))
-                disableDivButton.removeEventListener("click", activateClickDiv);
-            }
-            setTimeout(() => window.location.reload(), 5000)
-        } else {
-            if (this.style.backgroundColor === "red") {
-                bombNumber++;
-                remainingBomb.innerHTML = bombNumber
-            }
-            recursiveTrial(mineFieldObjects[i])
+    // Make the fields immutable
+    function divDisabler(arr) {
+        for (let i = 0; i < area; i++) {
+            arr[i].changeable = false
+            console.log("*")
         }
-    }
-})
-function fieldShowHide() {
-    let bombField = document.getElementById("dene-outside-id");
-
-    if (bombField.style.display === "" || bombField.style.display === ("none")) {
-        bombField.style.display = "block";
-    } else {
-        bombField.style.display = "none";
+        startButton.style.opacity = "1.0"
+        startButton.innerHTML = "Home"
     }
 }

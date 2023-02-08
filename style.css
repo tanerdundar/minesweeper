@@ -2,11 +2,6 @@
     margin-top: 50px;
     display: flex;
     flex-wrap: wrap;
-
-}
-
-.dene-outside {
-    display: none;
 }
 
 .button {
@@ -15,13 +10,4 @@
     font-size: 75px;
     margin-top: 25px;
     border-radius: 15px;
-}
-
-.bomb-number {
-    width: 150px;
-    height: 50px;
-    background-color: rgba(169, 153, 153, 0.0);
-    font-family: 'Times New Roman', Times, serif;
-    font-size: 40px;
-
 }
