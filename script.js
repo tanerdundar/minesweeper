@@ -18,19 +18,24 @@ function mineSweeper() {
 
     let column = 5
     let row = 5
+    let area = row * column;
     let condition = true;
-    while (condition) {
-        let arr = fieldSize()
-        row = arr[1]
-        column = arr[0]
+    if (!start) {
 
-        if (column >= 5 && row >= 5) {
-            condition = false;
-        } else {
-            alert("Please give 5 or greater numbers")
+        while (condition) {
+            let arr = fieldSize()
+            row = arr[1]
+            column = arr[0]
+            area = row * column;
+
+            if (column >= 5 && row >= 5) {
+                condition = false;
+            } else {
+                alert("Please give 5 or greater numbers")
+            }
         }
     }
-    let area = row * column;
+
     let id = 1
     let container = document.getElementById('dene')
     let mineFieldObjects = [];
@@ -195,17 +200,17 @@ function mineSweeper() {
     function divDisabler(arr) {
         for (let i = 0; i < area; i++) {
             arr[i].changeable = false
-            console.log("*")
+
         }
         startButton.style.opacity = "1.0"
         startButton.innerHTML = "Home"
     }
     function fieldSize() {
-        let column = prompt("Column number please (min:5)");
-        let row = prompt("Row number please (min:5)");
-        let arr = [];
-        arr.push(column)
-        arr.push(row)
-        return arr;
+        let columnX = prompt("Column number please (min:5)");
+        let rowX = prompt("Row number please (min:5)");
+        let arrX = [];
+        arrX.push(columnX)
+        arrX.push(rowX)
+        return arrX;
     }
 }
