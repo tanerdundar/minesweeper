@@ -4,10 +4,6 @@
     flex-wrap: wrap;
 }
 
-.button {
-    width: 350px;
-    height: 100px;
-    font-size: 75px;
-    margin-top: 25px;
-    border-radius: 15px;
+button {
+    display: none;
 }
