@@ -2,11 +2,11 @@ const startButton = document.getElementById("startButton")
 let start = false;
 
 startButton.addEventListener('click', function () {
+
     mineSweeper()
     startButton.style.opacity = "0.0"
 
     if (start) {
-
         setTimeout(() => window.location.reload(), 1)
     } else {
         start = true;
@@ -14,8 +14,22 @@ startButton.addEventListener('click', function () {
 })
 
 function mineSweeper() {
-    let column = 8;
-    let row = 10;
+
+
+    let column = 5
+    let row = 5
+    let condition = true;
+    while (condition) {
+        let arr = fieldSize()
+        row = arr[1]
+        column = arr[0]
+
+        if (column >= 5 && row >= 5) {
+            condition = false;
+        } else {
+            alert("Please give 5 or greater numbers")
+        }
+    }
     let area = row * column;
     let id = 1
     let container = document.getElementById('dene')
@@ -185,5 +199,13 @@ function mineSweeper() {
         }
         startButton.style.opacity = "1.0"
         startButton.innerHTML = "Home"
+    }
+    function fieldSize() {
+        let column = prompt("Column number please (min:5)");
+        let row = prompt("Row number please (min:5)");
+        let arr = [];
+        arr.push(column)
+        arr.push(row)
+        return arr;
     }
 }
