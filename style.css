@@ -10,14 +10,18 @@
     margin-top: 150px;
 }
 
+h2 {
+    font-size: 65px;
+}
+
 .levelButtons {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
-    width: 420px;
+    width: 590px;
 }
 
 .levBtn {
-    width: 120px;
+    width: 170px;
     height: 40px;
     color: black;
     font-size: 30px;
