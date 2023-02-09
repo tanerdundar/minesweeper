@@ -4,8 +4,8 @@ let area = row * column;
 let id = 1
 let container = document.getElementById('dene')
 let mineFieldObjects = [];
-container.style.width = column * 55 + "px";
-container.style.height = row * 55 + "px";
+container.style.width = column * 50 + "px";
+container.style.height = row * 50 + "px";
 
 for (let i = 1; i <= column; i++) {
     let columnsDiv = document.createElement("div");
@@ -91,9 +91,17 @@ for (let i = 0; i < area; i++) {
             // }
             const replay = document.getElementById("replayButton")
             replay.addEventListener("click", () => {
-
                 location.reload();
             })
+            const check = document.getElementById("checkButton")
+            let alert = document.getElementById("alert")
+            check.addEventListener("click", () => {
+                mypopup.style.display = "none";
+                alert.style.display = "block";
+
+            })
+
+
             /* ***********************************************************************************************************  */
 
         } else {
@@ -124,10 +132,10 @@ function insideChanger(num, i) {
     if (divWithBombNeighbour.isChangeable) {
         divWithBombNeighbour.innerHTML = num
         switch (num) {
-            case 1: divWithBombNeighbour.style.color = "rgb(248, 94, 120)"; break;
-            case 2: divWithBombNeighbour.style.color = "rgb(255, 179, 39)"; break;
-            case 3: divWithBombNeighbour.style.color = "rgb(84, 84, 255)"; break;
-            case 4: divWithBombNeighbour.style.color = "rgb(25, 128, 25)"; break;
+            case 2: divWithBombNeighbour.style.color = "rgb(248, 94, 120)"; break;
+            case 4: divWithBombNeighbour.style.color = "rgb(255, 179, 39)"; break;
+            case 1: divWithBombNeighbour.style.color = "rgb(84, 84, 255)"; break;
+            case 3: divWithBombNeighbour.style.color = "rgb(25, 128, 25)"; break;
             case 5: divWithBombNeighbour.style.color = "rgb(185, 7, 7)"; break;
             case 6: divWithBombNeighbour.style.color = "pink"; break;
             case 7: divWithBombNeighbour.style.color = "brown"; break;

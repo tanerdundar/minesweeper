@@ -2,10 +2,13 @@
     margin-top: 50px;
     display: flex;
     flex-wrap: wrap;
+    border: 2px solid brown;
 }
 
-button {
+.alert {
     display: none;
+    color: red;
+    font-size: 35px;
 }
 
 /* ***********************************************************************************************************  */
@@ -83,17 +86,24 @@ button {
     }
 }
 
-.replayButton {
+.buttons {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    width: 500px;
+}
+
+.endButton {
     margin-bottom: 20px;
     border: 2px solid red;
     border-radius: 5px;
     font-size: 22px;
-    width: 250px;
+    width: 200px;
     height: 30px;
     position: relative;
     display: inherit;
     background-color: rgb(228, 218, 205);
 }
+
 
 
 /* ***********************************************************************************************************  */
