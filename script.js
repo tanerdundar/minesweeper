@@ -1,16 +1,18 @@
 let startBtn;
-for (let i = 1; i < 4; i++) {
+for (let i = 1; i < 5; i++) {
     startBtn = document.getElementById("levBtn" + (i))
     startBtn.addEventListener("click", () => {
         document.getElementById('dene').style.opacity = "1.0"
         document.getElementById("out").style.opacity = "0.0"
         if (i == 1) {
-            game(8, 8, 15)
+            game(6, 6, 15) //  5
         } else if (i == 2) {
-            game(12, 12, 24)
+            game(9, 10, 20) // 18
+        } else if (i == 3) {
+            game(12, 12, 26) //  37
         }
         else {
-            game(16, 15, 31)
+            game(16, 15, 33) // 79
         }
     })
 }
@@ -144,8 +146,8 @@ function game(column, row, rate) {
                 case 1: divWithBombNeighbour.style.color = "rgb(84, 84, 255)"; break;
                 case 3: divWithBombNeighbour.style.color = "rgb(25, 128, 25)"; break;
                 case 5: divWithBombNeighbour.style.color = "rgb(185, 7, 7)"; break;
-                case 6: divWithBombNeighbour.style.color = "pink"; break;
-                case 7: divWithBombNeighbour.style.color = "brown"; break;
+                case 6: divWithBombNeighbour.style.color = "rgb(236, 95, 118)"; break;
+                case 7: divWithBombNeighbour.style.color = "rgb(222, 57, 57)"; break;
                 case 8: divWithBombNeighbour.style.color = "yellow"; break;
             }
             divWithBombNeighbour.style.borderColor = "black";

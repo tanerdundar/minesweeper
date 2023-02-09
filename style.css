@@ -2,7 +2,6 @@
     margin-top: 50px;
     display: flex;
     flex-wrap: wrap;
-    /* border: 2px solid brown; */
     opacity: 0.0;
 }
 
@@ -18,6 +17,7 @@ h2 {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     width: 590px;
+    column-gap: 40px;
 }
 
 .levBtn {
@@ -25,6 +25,15 @@ h2 {
     height: 40px;
     color: black;
     font-size: 30px;
+    border-radius: 5px;
+}
+
+#levBtn4 {
+    width: 590px;
+    height: 45px;
+    color: rgb(3, 64, 3);
+    background: linear-gradient(90deg, rgba(255, 255, 0, 1) 0%, rgba(255, 165, 0, 1) 50%, rgba(255, 0, 0, 1) 100%);
+    margin-top: 30px;
 }
 
 .alert {
@@ -66,7 +75,6 @@ h2 {
     background-color: rgb(228, 218, 205);
     color: red;
     border-radius: 15px;
-
 }
 
 .close {
