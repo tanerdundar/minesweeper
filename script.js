@@ -74,6 +74,28 @@ for (let i = 0; i < area; i++) {
                 divs.isChangeable = false
                 mineFieldObjects[i].changeable = false
             }
+            /* ***********************************************************************************************************  */
+            let mypopup = document.getElementById('popUp');
+            let close = document.getElementById("close");
+            mypopup.style.display = "block";
+
+            close.onclick = function () {
+                location.reload();
+                // mypopup.style.display = "none";
+            }
+
+            // window.onclick = function (event) {
+            //     if (event.target == mypopup) {
+            //         mypopup.style.display = "none";
+            //     }
+            // }
+            const replay = document.getElementById("replayButton")
+            replay.addEventListener("click", () => {
+
+                location.reload();
+            })
+            /* ***********************************************************************************************************  */
+
         } else {
             recursiveTrial(mineFieldObjects[i])
         }
@@ -102,11 +124,11 @@ function insideChanger(num, i) {
     if (divWithBombNeighbour.isChangeable) {
         divWithBombNeighbour.innerHTML = num
         switch (num) {
-            case 1: divWithBombNeighbour.style.color = "red"; break;
-            case 2: divWithBombNeighbour.style.color = "orange"; break;
-            case 3: divWithBombNeighbour.style.color = "blue"; break;
-            case 4: divWithBombNeighbour.style.color = "green"; break;
-            case 5: divWithBombNeighbour.style.color = "purple"; break;
+            case 1: divWithBombNeighbour.style.color = "rgb(248, 94, 120)"; break;
+            case 2: divWithBombNeighbour.style.color = "rgb(255, 179, 39)"; break;
+            case 3: divWithBombNeighbour.style.color = "rgb(84, 84, 255)"; break;
+            case 4: divWithBombNeighbour.style.color = "rgb(25, 128, 25)"; break;
+            case 5: divWithBombNeighbour.style.color = "rgb(185, 7, 7)"; break;
             case 6: divWithBombNeighbour.style.color = "pink"; break;
             case 7: divWithBombNeighbour.style.color = "brown"; break;
             case 8: divWithBombNeighbour.style.color = "yellow"; break;
