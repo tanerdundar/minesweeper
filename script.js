@@ -1,13 +1,3 @@
-// let btn1 = document.getElementById("levBtn1")
-// let btn2 = document.getElementById("levBtn2")
-// let btn3 = document.getElementById("levBtn3")
-
-
-// btn1.addEventListener("click", () => {
-//     game(8, 8, 15)
-//     document.getElementById('dene').style.opacity = "1.0"
-// })
-
 let startBtn;
 for (let i = 1; i < 4; i++) {
     startBtn = document.getElementById("levBtn" + (i))
@@ -101,21 +91,14 @@ function game(column, row, rate) {
                     divs.isChangeable = false
                     mineFieldObjects[i].changeable = false
                 }
-                /* ***********************************************************************************************************  */
                 let mypopup = document.getElementById('popUp');
                 let close = document.getElementById("close");
                 mypopup.style.display = "block";
 
                 close.onclick = function () {
                     location.reload();
-                    // mypopup.style.display = "none";
                 }
 
-                // window.onclick = function (event) {
-                //     if (event.target == mypopup) {
-                //         mypopup.style.display = "none";
-                //     }
-                // }
                 const replay = document.getElementById("replayButton")
                 replay.addEventListener("click", () => {
                     location.reload();
@@ -127,9 +110,6 @@ function game(column, row, rate) {
                     alert.style.display = "block";
 
                 })
-
-
-                /* ***********************************************************************************************************  */
 
             } else {
                 recursiveTrial(mineFieldObjects[i])
