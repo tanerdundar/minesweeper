@@ -3,6 +3,24 @@
     display: flex;
     flex-wrap: wrap;
     border: 2px solid brown;
+    opacity: 0.0;
+}
+
+.outside {
+    margin-top: 150px;
+}
+
+.levelButtons {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    width: 420px;
+}
+
+.levBtn {
+    width: 120px;
+    height: 40px;
+    color: black;
+    font-size: 30px;
 }
 
 .alert {
