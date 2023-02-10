@@ -23,8 +23,8 @@ function game(column, row, rate) {
     let id = 1
     let container = document.getElementById('dene')
     let mineFieldObjects = [];
-    container.style.width = column * 33 + "px";
-    container.style.height = row * 33 + "px";
+    container.style.width = column * 55 + "px";
+    container.style.height = row * 55 + "px";
 
     for (let i = 1; i <= column; i++) {
         let columnsDiv = document.createElement("div");
@@ -32,8 +32,8 @@ function game(column, row, rate) {
         for (let j = 1; j <= row; j++) {
             let field = document.createElement("div")
             columnsDiv.appendChild(field)
-            field.style.width = "27px"
-            field.style.height = "27px"
+            field.style.width = "45px"
+            field.style.height = "45px"
             field.style.backgroundColor = "rgb(228, 218, 205)";
             field.style.borderRadius = "5px";
             field.style.borderStyle = "solid";
@@ -57,9 +57,9 @@ function game(column, row, rate) {
         if (mineFieldObjects[bombId].bomb) {
         } else {
             let createBomb = document.createElement("i");
-            createBomb.classList.add("fa-solid", "fa-bomb")
+            createBomb.classList.add("fa-solid", "fa-bomb", "fa-2x")
             createBomb.style.opacity = "0.0"
-            createBomb.style.marginTop = "6px"
+            createBomb.style.marginTop = "10px"
             mineFieldObjects[bombId].bomb = true;
             let fieldWithBomb = document.getElementById("field" + (bombId + 1))
             fieldWithBomb.style.position = "relative"
@@ -153,7 +153,7 @@ function game(column, row, rate) {
             }
             divWithBombNeighbour.style.borderColor = "black";
             divWithBombNeighbour.style.backgroundColor = "rgb(228, 218, 205)";
-            divWithBombNeighbour.style.fontSize = "24px"
+            divWithBombNeighbour.style.fontSize = "40px"
         }
     }
 
