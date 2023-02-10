@@ -1,5 +1,5 @@
 .deneme {
-    margin-top: 50px;
+    margin-top: 150px;
     display: flex;
     flex-wrap: wrap;
     opacity: 0.0;
@@ -42,7 +42,7 @@ h2 {
     font-size: 35px;
 }
 
-.pencere {
+.window {
     display: none;
     position: fixed;
     z-index: 10;
@@ -55,7 +55,7 @@ h2 {
     background-color: rgba(0, 0, 0, 0.5);
 }
 
-.pencere-content {
+.window-content {
     position: relative;
     background-color: rgb(228, 218, 205);
     margin: auto;
@@ -68,9 +68,10 @@ h2 {
     animation-name: animatetop;
     animation-duration: 0.4s;
     border: 5px solid red;
+    min-width: 500px;
 }
 
-.pencere-head {
+.window-head {
     padding: 2px 16px;
     background-color: rgb(228, 218, 205);
     color: red;
@@ -118,7 +119,7 @@ h2 {
 .buttons {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    width: 500px;
+    min-width: 500px;
 }
 
 .endButton {
