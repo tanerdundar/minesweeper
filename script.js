@@ -21,10 +21,14 @@ function game(column, row, rate) {
 
     let area = row * column;
     let id = 1
+    let bombNumberDiv = document.getElementById('bombCount')
     let container = document.getElementById('dene')
+    let bombDiv = bombCounter()
     let mineFieldObjects = [];
     container.style.width = column * 55 + "px";
     container.style.height = row * 55 + "px";
+    bombNumberDiv.appendChild(bombDiv);
+
 
     for (let i = 1; i <= column; i++) {
         let columnsDiv = document.createElement("div");
@@ -52,13 +56,16 @@ function game(column, row, rate) {
             })
         }
     }
-    for (let i = 0; i < Math.floor(((mineFieldObjects.length * rate) / 100) + 0.5);) {
+    let bombNumber = (Math.floor(((mineFieldObjects.length * rate) / 100) + 0.5))
+    bombDiv.innerText = bombNumber
+
+    for (let i = 0; i < bombNumber;) {
         let bombId = Math.floor(Math.random() * (area))
         if (mineFieldObjects[bombId].bomb) {
         } else {
             let createBomb = document.createElement("i");
             createBomb.classList.add("fa-solid", "fa-bomb", "fa-2x")
-            createBomb.style.opacity = "0.0"
+            createBomb.style.opacity = "0.2"
             createBomb.style.marginTop = "10px"
             mineFieldObjects[bombId].bomb = true;
             let fieldWithBomb = document.getElementById("field" + (bombId + 1))
@@ -75,6 +82,8 @@ function game(column, row, rate) {
             if (flag.isChangeable) {
                 let color = flag.style.backgroundColor;
                 flag.style.backgroundColor = (("red" == color) ? "rgb(228, 218, 205)" : "red")
+                bombNumber = (("red" == color) ? bombNumber + 1 : bombNumber - 1)
+                bombDiv.innerText = bombNumber
             }
         });
     }
@@ -132,6 +141,9 @@ function game(column, row, rate) {
     function backgroundChanger(i) {
         let zeroBombDiv = document.getElementById("field" + mineFieldObjects[i].id)
         if (zeroBombDiv.isChangeable) {
+            if (zeroBombDiv.style.backgroundColor == "red") {
+                bombsRedDeleter()
+            }
             zeroBombDiv.style.backgroundColor = "rgb(247, 245, 242)"
             zeroBombDiv.style.borderColor = "rgb(247, 245, 242)";
         }
@@ -139,6 +151,9 @@ function game(column, row, rate) {
     function insideChanger(num, i) {
         let divWithBombNeighbour = document.getElementById("field" + mineFieldObjects[i].id)
         if (divWithBombNeighbour.isChangeable) {
+            if (divWithBombNeighbour.style.backgroundColor == "red") {
+                bombsRedDeleter()
+            }
             divWithBombNeighbour.innerHTML = num
             divWithBombNeighbour.isChangeable = false;
             switch (num) {
@@ -206,5 +221,20 @@ function game(column, row, rate) {
         } else {
             insideChanger(numberFinder(i), i)
         }
+    }
+
+    function bombCounter() {
+        let bombCounterDiv = document.createElement("div");
+        bombCounterDiv.style.width = "200px"
+        bombCounterDiv.style.height = "50px";
+        bombCounterDiv.style.backgroundColor = "rgba(145, 145, 186, 0.685)";
+        bombCounterDiv.style.borderRadius = "5px"
+        bombCounterDiv.style.fontSize = "35px"
+
+        return bombCounterDiv;
+    }
+    function bombsRedDeleter() {
+        bombNumber++;
+        bombDiv.innerText = bombNumber
     }
 }

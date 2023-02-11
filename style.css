@@ -3,6 +3,7 @@
     display: flex;
     flex-wrap: wrap;
     opacity: 0.0;
+
 }
 
 .outside {
@@ -132,4 +133,8 @@ h2 {
     position: relative;
     display: inherit;
     background-color: rgb(228, 218, 205);
+}
+
+#redd {
+    background-color: red;
 }
