@@ -16,10 +16,12 @@ for (let i = 1; i < 5; i++) {
         }
     })
 }
+let counter = 0;
 
 function game(column, row, rate) {
 
     let area = row * column;
+    let remaining = area - counter;
     let id = 1
     let bombNumberDiv = document.getElementById('bombCount')
     let container = document.getElementById('dene')
@@ -27,7 +29,9 @@ function game(column, row, rate) {
     let mineFieldObjects = [];
     container.style.width = column * 55 + "px";
     container.style.height = row * 55 + "px";
+    container.style.borderRadius = "5px"
     bombNumberDiv.appendChild(bombDiv);
+
 
 
     for (let i = 1; i <= column; i++) {
@@ -39,7 +43,7 @@ function game(column, row, rate) {
             field.style.width = "45px"
             field.style.height = "45px"
             field.style.backgroundColor = "rgb(228, 218, 205)";
-            field.style.borderRadius = "5px";
+            //  field.style.borderRadius = "25px";
             field.style.borderStyle = "solid";
             field.style.position = "relative";
             field.id = "field" + id;
@@ -57,6 +61,7 @@ function game(column, row, rate) {
         }
     }
     let bombNumber = (Math.floor(((mineFieldObjects.length * rate) / 100) + 0.5))
+    const constBombNumber = bombNumber
     bombDiv.innerText = bombNumber
 
     for (let i = 0; i < bombNumber;) {
@@ -144,8 +149,8 @@ function game(column, row, rate) {
             if (zeroBombDiv.style.backgroundColor == "red") {
                 bombsRedDeleter()
             }
-            zeroBombDiv.style.backgroundColor = "rgb(247, 245, 242)"
-            zeroBombDiv.style.borderColor = "rgb(247, 245, 242)";
+            zeroBombDiv.style.backgroundColor = "rgb(192, 176, 152)"
+            zeroBombDiv.style.borderColor = "rgb(192, 176, 152)";
         }
     }
     function insideChanger(num, i) {
@@ -156,6 +161,8 @@ function game(column, row, rate) {
             }
             divWithBombNeighbour.innerHTML = num
             divWithBombNeighbour.isChangeable = false;
+            counter++
+
             switch (num) {
                 case 2: divWithBombNeighbour.style.color = "rgb(248, 94, 120)"; break;
                 case 4: divWithBombNeighbour.style.color = "rgb(255, 179, 39)"; break;
@@ -169,11 +176,15 @@ function game(column, row, rate) {
             divWithBombNeighbour.style.borderColor = "black";
             divWithBombNeighbour.style.backgroundColor = "rgb(228, 218, 205)";
             divWithBombNeighbour.style.fontSize = "40px"
+
+            if (area - counter == constBombNumber) {
+                gameFinisher()
+
+            }
+
         }
     }
-
     let checkedDivs = [];
-
     function recursiveTrial(param) {
         if (param.bomb || checkedDivs.some((idNumber) => idNumber == param.id))
             return;
@@ -217,12 +228,14 @@ function game(column, row, rate) {
             }
             let divThatHasToBeChanged = document.getElementById("field" + param.id)
             divThatHasToBeChanged.isChangeable = false;
-
+            counter++
+            if (area - counter == constBombNumber) {
+                gameFinisher()
+            }
         } else {
             insideChanger(numberFinder(i), i)
         }
     }
-
     function bombCounter() {
         let bombCounterDiv = document.createElement("div");
         bombCounterDiv.style.width = "200px"
@@ -230,11 +243,32 @@ function game(column, row, rate) {
         bombCounterDiv.style.backgroundColor = "rgba(145, 145, 186, 0.685)";
         bombCounterDiv.style.borderRadius = "5px"
         bombCounterDiv.style.fontSize = "35px"
-
         return bombCounterDiv;
     }
     function bombsRedDeleter() {
         bombNumber++;
         bombDiv.innerText = bombNumber
+    }
+    function gameFinisher() {
+        console.log("game finished")
+        let mypopup2 = document.getElementById('popUp2');
+        let close2 = document.getElementById("close2");
+        mypopup2.style.display = "block";
+
+        close2.onclick = function () {
+            location.reload();
+        }
+
+        const replay2 = document.getElementById("replayButton2")
+        replay2.addEventListener("click", () => {
+            location.reload();
+        })
+        // const check2 = document.getElementById("checkButton2")
+        // let alert2 = document.getElementById("alert2")
+        // check2.addEventListener("click", () => {
+        //     mypopup2.style.display = "none";
+        //     alert2.style.display = "block";
+
+        // })
     }
 }

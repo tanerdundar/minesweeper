@@ -138,3 +138,99 @@ h2 {
 #redd {
     background-color: red;
 }
+
+.window2 {
+    display: none;
+    position: fixed;
+    z-index: 10;
+    padding-top: 250px;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.window-content2 {
+    position: relative;
+    background-color: rgb(228, 218, 205);
+    margin: auto;
+    padding: 0;
+    width: 40%;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    border-radius: 15px;
+    -webkit-animation-name: animatetop2;
+    -webkit-animation-duration: 0.4s;
+    animation-name: animatetop2;
+    animation-duration: 0.4s;
+    border: 5px solid green;
+    min-width: 500px;
+}
+
+.window-head2 {
+    padding: 2px 16px;
+    background-color: rgb(228, 218, 205);
+    color: green;
+    border-radius: 15px;
+}
+
+.close2 {
+    color: green;
+    float: right;
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.close2:hover,
+.close2:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+@-webkit-keyframes animatetop2 {
+    from {
+        top: -300px;
+        opacity: 0
+    }
+
+    to {
+        top: 0;
+        opacity: 1
+    }
+}
+
+@keyframes animatetop2 {
+    from {
+        top: 200px;
+        opacity: 0
+    }
+
+    to {
+        top: 0;
+        opacity: 1
+    }
+}
+
+.buttons2 {
+    display: grid;
+    grid-template-columns: 1fr;
+    min-width: 500px;
+}
+
+.endButton2 {
+    margin-bottom: 20px;
+    border: 2px solid green;
+    border-radius: 5px;
+    font-size: 22px;
+    width: 200px;
+    height: 30px;
+    position: relative;
+    display: inherit;
+    background-color: rgb(228, 218, 205);
+}
+
+h3 {
+    font-size: 50px;
+}
