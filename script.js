@@ -70,7 +70,7 @@ function game(column, row, rate) {
         } else {
             let createBomb = document.createElement("i");
             createBomb.classList.add("fa-solid", "fa-bomb", "fa-2x")
-            createBomb.style.opacity = "0.2"
+            createBomb.style.opacity = "0.0"
             createBomb.style.marginTop = "10px"
             mineFieldObjects[bombId].bomb = true;
             let fieldWithBomb = document.getElementById("field" + (bombId + 1))
@@ -263,12 +263,5 @@ function game(column, row, rate) {
         replay2.addEventListener("click", () => {
             location.reload();
         })
-        // const check2 = document.getElementById("checkButton2")
-        // let alert2 = document.getElementById("alert2")
-        // check2.addEventListener("click", () => {
-        //     mypopup2.style.display = "none";
-        //     alert2.style.display = "block";
-
-        // })
     }
 }
