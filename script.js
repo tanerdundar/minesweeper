@@ -150,7 +150,7 @@ function game(column, row, rate) {
                 bombsRedDeleter()
             }
             zeroBombDiv.style.backgroundColor = "rgb(192, 176, 152)"
-            zeroBombDiv.style.borderColor = "rgb(192, 176, 152)";
+
         }
     }
     function insideChanger(num, i) {
