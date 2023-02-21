@@ -1,4 +1,5 @@
 let startBtn;
+
 for (let i = 1; i < 5; i++) {
     startBtn = document.getElementById("levBtn" + (i))
     startBtn.addEventListener("click", () => {
@@ -25,7 +26,7 @@ function game(column, row, rate) {
     let id = 1
     let bombNumberDiv = document.getElementById('bombCount')
     let container = document.getElementById('dene')
-    let bombDiv = bombCounter()
+    let bombDiv = bombCounter();
     let mineFieldObjects = [];
     container.style.width = column * 55 + "px";
     container.style.height = row * 55 + "px";
@@ -98,6 +99,7 @@ function game(column, row, rate) {
         divButton.addEventListener('click', () => {
             if (mineFieldObjects[i].bomb) {
                 let bombsField = mineFieldObjects.filter((item) => item.bomb == true)
+                document.getElementById("field" + (i + 1)).style.backgroundColor = "rgb(255, 69, 0)";
                 for (let j = 0; j < bombsField.length; j++) {
                     let foundDiv = document.getElementById("field" + (bombsField[j].id))
                     foundDiv.firstChild.style.opacity = "1.0"
