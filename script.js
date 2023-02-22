@@ -99,7 +99,7 @@ function game(column, row, rate) {
         divButton.addEventListener('click', () => {
             if (mineFieldObjects[i].bomb) {
                 let bombsField = mineFieldObjects.filter((item) => item.bomb == true)
-                document.getElementById("field" + (i + 1)).style.backgroundColor = "rgb(255, 69, 0)";
+
                 for (let j = 0; j < bombsField.length; j++) {
                     let foundDiv = document.getElementById("field" + (bombsField[j].id))
                     foundDiv.firstChild.style.opacity = "1.0"
